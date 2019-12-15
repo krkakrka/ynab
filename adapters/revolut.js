@@ -1,6 +1,5 @@
 const fs = require('fs');
 const moment = require('moment');
-const CSV_HEADER_ROW = require('./ynab');
 
 function processedRowsToCSV(rows) {
 	return rows.map(row => [
@@ -16,7 +15,7 @@ function convertRevoCSV(fileName) {
 	const rawText = fs.readFileSync(fileName, 'utf8');
 	const rawRows = rawText.split('\n').map(row => row.split(';')).splice(1).filter(row => row.filter(i => i).length).map(i => i.map(i => i.trim()));
 	const csv = processedRowsToCSV(rawRows);
-  return `${CSV_HEADER_ROW}\n${csv}`;
+  return csv;
 }
 
 module.exports = {

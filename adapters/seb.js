@@ -1,6 +1,5 @@
 const fs = require('fs');
 const moment = require('moment');
-const CSV_HEADER_ROW = require('./ynab');
 
 const ATTR_INDEX_TO_KEY = {
 	2: 'date', // 20191124
@@ -36,7 +35,7 @@ function convertSEBACC(fileName) {
 	const rawRows = rawText.split('\r\n').map(row => row.split('\t')).filter(row => row[0] === '010');
 	const processedRows = rawRows.map(rawRowToProcessedRow);
   const csv = processedRowsToCSV(processedRows);
-	return `${CSV_HEADER_ROW}\n${csv}`;
+	return csv;
 }
 
 module.exports = {
